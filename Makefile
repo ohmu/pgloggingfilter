@@ -8,6 +8,10 @@ PG_CONFIG = pg_config
 PGXS := $(shell $(PG_CONFIG) --pgxs)
 include $(PGXS)
 
+sqlstatehashfunc.c: gensqlstatehashfunc.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -fopenmp -o gensqlstatehashfunc $^ -lpq
+	./gensqlstatehashfunc $(shell $(PG_CONFIG) --includedir-server) > $@
+
 dist:
 	git archive --output=../pgloggingfilter_$(long_ver).tar.gz --prefix=pgloggingfilter/ HEAD .
 
