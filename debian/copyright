@@ -1,0 +1,11 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Name: pgloggingfilter
+Source: https://github.com/saaros/pgloggingfilter/
+
+Files: *
+Copyright: 2014 Oskari Saarenmaa <os@ohmu.fi>
+License: Apache-2.0
+
+License: Apache-2.0
+  On Debian GNU/Linux system you can find the complete text of the
+  Apache 2.0 license in '/usr/share/common-licenses/Apache-2.0'.
