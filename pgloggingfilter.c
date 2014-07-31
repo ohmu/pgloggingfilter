@@ -65,8 +65,13 @@ void _PG_init(void)
       filter_by_sqlstate_hash[i].stmt_loglevel = -1;
     }
   DefineCustomStringVariable("pgloggingfilter.log_min_messages_by_sqlstate",
-                             "XXX Comma-separated list of sqlstate log levels.",
-                             "XXX",
+                             "Increases minimum error level required to log "
+                                 "errors per SQLSTATE.",
+                             "Comma-separated list of SQLSTATE:ERRORLEVEL "
+                                 "pairs which can be used to suppress error "
+                                 "logging for some SQLSTATEs.  This option "
+                                 "can not enable logging for errors which "
+                                 "are suppressed by log_min_messages.",
                              &str_log_min_messages_by_sqlstate,
                              NULL,
                              PGC_SUSET,
@@ -75,8 +80,15 @@ void _PG_init(void)
                              assign_filter_by_sqlstate_msgs,
                              NULL);
   DefineCustomStringVariable("pgloggingfilter.log_min_error_statement_by_sqlstate",
-                             "XXX Comma-separated list of sqlstate log levels.",
-                             "XXX",
+                             "Increases minimum error level required to log "
+                                 "statements casuing errors per SQLSTATE.",
+                             "Comma-separated list of SQLSTATE:ERRORLEVEL "
+                                 "pairs which can be used to suppress "
+                                 "logging of statements that caused errors "
+                                 "based on their SQLSTATEs.  This option "
+                                 "can not enable logging for errors which "
+                                 "are suppressed by "
+                                 "log_min_error_statement.",
                              &str_log_min_error_statement_by_sqlstate,
                              NULL,
                              PGC_SUSET,

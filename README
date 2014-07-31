@@ -6,6 +6,26 @@ to suppress logging of various expected errors which is especially useful in
 cases where users are allowed to call stored procedures with potentially
 invalid arguments.
 
+To enable pgloggingfilter it needs to be included in postgresql.conf's
+shared_preload_libraries list after which control minimum error levels for
+logging per sqlstate using the two new GUCs, for example:
+
+  pgloggingfilter.log_min_messages_by_sqlstate = '22012:PANIC'
+  pgloggingfilter.log_min_error_statement_by_sqlstate = 'P0001:PANIC,23503:PANIC'
+
+would set the minimum error level for logging division by zero errors to
+PANIC essentially disabling their logging and also prevent statements
+causing PL/pgSQL 'RAISE EXCEPTION' and foreign key violations from being
+logged.
+
+Note that this module can only increase the minimum error level from the
+base values set with log_min_messages and log_min_error_statement - i.e.
+if statement logging is not globally enabled this module can't enable it
+for any SQLSTATEs.
+
+See http://www.postgresql.org/docs/devel/static/errcodes-appendix.html for
+the list of SQLSTATEs.
+
 This was originally proposed as a core feature, see
 https://commitfest.postgresql.org/action/patch_view?id=1360
 
