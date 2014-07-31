@@ -40,6 +40,6 @@ http://opensource.org/licenses/Apache-2.0 .
 contact
 =======
 
-pgloggingfilter is maintained by Oskari Saarenmaa <os@ohmu.fi>, bug reports
-and patches are very welcome, please post them as GitHub issues and pull
-requests at https://github.com/saaros/pgloggingfilter
+pgloggingfilter is maintained by Ohmu Ltd hackers <opensource@ohmu.fi>, bug
+reports and patches are very welcome, please post them as GitHub issues and
+pull requests at https://github.com/ohmu/pgloggingfilter

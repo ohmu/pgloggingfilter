@@ -1,10 +1,10 @@
 Source: pgloggingfilter
 Section: database
 Priority: extra
-Maintainer: Oskari Saarenmaa <os@ohmu.fi>
+Maintainer: Ohmu Opensource <opensource@ohmu.fi>
 Build-Depends: debhelper (>= 8), postgresql-server-dev-PGVERSION
 Standards-Version: 3.9.5
-Homepage: https://github.com/saaros/pgloggingfilter/
+Homepage: https://github.com/ohmu/pgloggingfilter/
 
 Package: postgresql-pgloggingfilter-PGVERSION
 Architecture: any

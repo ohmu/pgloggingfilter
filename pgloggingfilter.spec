@@ -3,6 +3,7 @@ Version:        %{major_version}
 Release:        %{minor_version}%{?dist}
 Summary:        filter module for PostgreSQL logging
 Group:          Applications/Databases
+URL:            https://github.com/ohmu/pgloggingfilter/
 License:        ASL 2.0
 Source0:        pgloggingfilter-rpm-src.tar.gz
 Requires:       postgresql-server
