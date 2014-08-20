@@ -9,7 +9,7 @@ Homepage: https://github.com/ohmu/pgloggingfilter/
 Package: postgresql-pgloggingfilter-PGVERSION
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, postgresql-PGVERSION
-Description: pgloggingfilter is a filter module for PostgreSQL logging
+Description: filter module for PostgreSQL logging
  It can be used to suppress logging of various expected errors which is
  especially useful in cases where users are allowed to call stored
  procedures with potentially invalid arguments.
