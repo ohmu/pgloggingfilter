@@ -101,8 +101,20 @@ main(int argc, char **argv)
   unsigned int nums[1000], cnt = 0, uniq_nums[1000], uniq_cnt = 0, i;
   unsigned int modulos[] = { 1409, 2027, 3061, 4583 };
 
+  if (argc != 2)
+    {
+      fprintf(stderr, "usage: %s `pg_config --includedir-server`\n", argv[0]);
+      return 1;
+    }
+
   snprintf(errcodes_h_path, sizeof(errcodes_h_path), "%s/utils/errcodes.h", argv[1]);
   fp = fopen(errcodes_h_path, "r");
+  if (fp == NULL)
+    {
+      perror(errcodes_h_path);
+      return 1;
+    }
+
   while (fgets(line, sizeof(line), fp) != NULL)
     if (sscanf(line, "#define ERRCODE_%*s MAKE_SQLSTATE('%c','%c','%c','%c','%c')",
                &a, &b, &c, &d, &e) == 5)
