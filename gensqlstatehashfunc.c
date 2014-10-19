@@ -14,6 +14,8 @@
 #undef qsort
 #include <time.h>
 
+#ifndef VERIFYFUNC
+
 static inline unsigned int
 hashm(unsigned int h1, unsigned int modulo, unsigned int c1, unsigned int c2)
 {
@@ -86,6 +88,31 @@ getperfect(unsigned int *nums, unsigned int cnt, unsigned int modulo)
   return 0;
 }
 
+#else /* VERIFYFUNC */
+
+#include "sqlstatehashfunc.c"
+
+static int
+verifyfunc(unsigned int *nums, unsigned int cnt)
+{
+  unsigned int result[HASH_SQLSTATE_MODULO], collisions = 0, i;
+
+  memset(result, 0xff, sizeof(result));
+  for (i=0; i<cnt; i++)
+    {
+      unsigned int h = hash_sqlstate(nums[i]);
+      if (result[h] != 0xffffffff)
+        collisions ++;
+      else
+        result[h] = i;
+    }
+
+  fprintf(stderr, "found %u collisions\n", collisions);
+  return collisions ? 1 : 0;
+}
+
+#endif /* VERIFYFUNC */
+
 static int
 cmp_uints(const void *a, const void *b)
 {
@@ -126,6 +153,7 @@ main(int argc, char **argv)
       uniq_nums[uniq_cnt++] = nums[i];
   fprintf(stderr, "input set size: %u\n", uniq_cnt);
 
+#ifndef VERIFYFUNC
   for (i=0; i<sizeof(modulos)/sizeof(modulos[0]); i++)
     {
       int res = getperfect(uniq_nums, uniq_cnt, modulos[i]);
@@ -133,4 +161,7 @@ main(int argc, char **argv)
         return 0;
     }
   return 1;
+#else /* VERIFYFUNC */
+  return verifyfunc(uniq_nums, uniq_cnt);
+#endif /* VERIFYFUNC */
 }

@@ -25,6 +25,9 @@ make
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 
+%check
+make check
+
 %clean
 rm -rf %{buildroot}
 
